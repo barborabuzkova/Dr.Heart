@@ -7,8 +7,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "helloServlet", value = "/hello-servlet")
-public class HelloServlet extends HttpServlet {
+@WebServlet(name = "MatchPage", value = "/MatchPage")
+public class MatchPage extends HttpServlet {
    // private String message;
     private ArrayList<Profile> profiles;
 
@@ -45,7 +45,7 @@ public class HelloServlet extends HttpServlet {
         boolean emailFound = false;
 
         //table
-        out.println("<html> <table border=1px> <tr> <th>Match</th> <th>Compatibility %</th> </tr>");
+        out.println("<html> <table border=1px> <tr> <th>Name</th> <th>Compatibility %</th> </tr>");
         for (int i = 0; i < profiles.size(); i++) {
             if (emailProvided.equals(profiles.get(i).getEmail())) {
                 out.println(tableRow(profiles.get(i)));
@@ -60,12 +60,6 @@ public class HelloServlet extends HttpServlet {
         }
         out.println("<a href = "+request.getContextPath()+"> back </a>");
         out.println("</html>");
-    }
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        System.out.println("Post called but we're calling get. We don't really understand why.");
-        doGet(request, response);
     }
 
     private String tableRow (Profile profile) {
