@@ -48,6 +48,10 @@ public class Profile{
         return grade;
     }
 
+    public ArrayList<Question> getQuestions() {
+        return questions;
+    }
+
     //This isn't ever going to be useful
 //    public void addQuestion(Question newQuestion) {
 //        questions.add(newQuestion);

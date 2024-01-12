@@ -3,9 +3,8 @@ package com.drheart.demo;
 import java.io.*;
 import java.util.ArrayList;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.annotation.WebServlet;
 
 @WebServlet(name = "MatchPage", value = "/MatchPage")
 public class MatchPage extends HttpServlet {
@@ -70,6 +69,5 @@ public class MatchPage extends HttpServlet {
         }
         return result.toString();
     }
-
 
 }
