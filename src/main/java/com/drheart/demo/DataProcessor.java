@@ -4,13 +4,13 @@ import java.io.*; //files
 import java.util.*; //scan
 //import org.json.simple.*;
 
-public class FileReader{ //can we get this to run when the excel file updates?
+public class DataProcessor { //can we get this to run when the excel file updates?
 
     public static void main(String[] args) throws FileNotFoundException{
 
 //       String name = "";
 //       int age = 0; //??
-        Scanner scannerGeorg = new Scanner(new File("Sample data.csv"));
+        Scanner scannerGeorg = new Scanner(new File("SampleFormData.csv"));
 
         String bob = scannerGeorg.nextLine();
         ArrayList<String> questions = new ArrayList<>();
