@@ -73,7 +73,7 @@ public class Profile{
         //Add email/identifier to central file
         mainFile.print(this.email + ",");
 
-        File newProfileFile = new File("/Users/babu/IdeaProjects/demo/src/FileStorage/" + this.email + ".csv");
+        File newProfileFile = new File("/Users/babu/IdeaProjects/demo/src/main/FileStorage/" + this.email + ".csv");
         newProfile = new PrintStream(newProfileFile);
         populateNewFile();
     }

@@ -14,7 +14,7 @@ public class DataProcessor { //Can we get this to run when the excel file update
 
     public static void main(String[] args) throws FileNotFoundException {
         //Create scanner, split
-        Scanner scannerGeorg = new Scanner(new File("Sample data.csv"));
+        Scanner scannerGeorg = new Scanner(new File("/Users/babu/IdeaProjects/demo/src/main/resources/SampleFormData.csv"));
 
         //Read first line and read in questions
         String bob = scannerGeorg.nextLine();
@@ -22,7 +22,7 @@ public class DataProcessor { //Can we get this to run when the excel file update
         String[] lineOne = bob.split("\\s*,\\s*");
 
         //Create Main File with all profiles
-        File MainFileForIDS = new File("/Users/babu/IdeaProjects/demo/src/FileStorage/MainFileForIDS.csv");
+        File MainFileForIDS = new File("/Users/babu/IdeaProjects/demo/src/main/FileStorage/MainFileForIDS.csv");
         PrintStream mainFile = new PrintStream(MainFileForIDS);
 
         //System.out.println(lineOne[0] + " " + lineOne[1]); //test line
@@ -67,7 +67,7 @@ public class DataProcessor { //Can we get this to run when the excel file update
     }
 
     public static void algorithm(ArrayList<Profile> profiles, int profileNumber) {
-        for (int j = profileNumber + 1; j < profiles.size(); j++) {
+        for (int j = 0; j < profiles.size(); j++) {
             ArrayList<Question> q1 = profiles.get(profileNumber).getQuestions();
             ArrayList<Question> q2 = profiles.get(j).getQuestions();
             int selfSum1 = 0;
