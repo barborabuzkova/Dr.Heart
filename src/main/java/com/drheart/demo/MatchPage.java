@@ -64,7 +64,7 @@ public class MatchPage extends HttpServlet {
     private String tableRow (Profile profile) {
         StringBuilder result = new StringBuilder();
         for (Match i : profile.getMatches()) {
-            result.append("<tr> <td>" + i.getProfile().getName() + "</td>" +
+            result.append("<tr> <td>" + i.getOtherProfile().getName() + "</td>" +
                     "<td>" + i.getMatchPercentage() + "</td> </tr>");
         }
         return result.toString();

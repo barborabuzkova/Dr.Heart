@@ -1,45 +1,55 @@
+/* Evan, Serenna, Barbora
+Originally Titled "File Reader"
+1/11 most recent - 1/16
+Evan and Serenna made algorithm, createProfile, matchScore, and importanceVal
+Barbora edited main and added MainFile printing
+ */
 package com.drheart.demo;
 
 import java.io.*; //files
 import java.util.*; //scan & math
 //import org.json.simple.*;
 
-public class DataProcessor { //can we get this to run when the excel file updates?
+public class DataProcessor { //Can we get this to run when the excel file updates?
 
     public static void main(String[] args) throws FileNotFoundException {
-
-        //       String name = "";
-        //       int age = 0; //??
+        //Create scanner, split
         Scanner scannerGeorg = new Scanner(new File("Sample data.csv"));
 
+        //Read first line and read in questions
         String bob = scannerGeorg.nextLine();
         ArrayList<String> questions = new ArrayList<>();
+        String[] lineOne = bob.split("\\s*,\\s*");
 
-        String[] lineOne = bob.split("\\s*,\\s*"); //regex
+        //Create Main File with all profiles
+        File MainFileForIDS = new File("/Users/babu/IdeaProjects/demo/src/FileStorage/MainFileForIDS.csv");
+        PrintStream mainFile = new PrintStream(MainFileForIDS);
+
         //System.out.println(lineOne[0] + " " + lineOne[1]); //test line
-
-        int x = 7;
+        int x = 7; // how many questions are just for profile information + age which we don't use
         //System.out.println(lineOne.length); //test line
         while (x < lineOne.length) {
             //System.out.println(lineOne[x]); //test line
             questions.add(lineOne[x]);
-            x += 3;
+            x += 3; // by 1, and then skip 2 for 'desired outcome' and 'importance'
         }
         //System.out.println(questions.toString()); //test line
+
+        //create profiles
         ArrayList<Profile> profiles = new ArrayList<>();
         while (scannerGeorg.hasNextLine()) {
-            profiles.add(createProfile(scannerGeorg.nextLine(), questions));
+            profiles.add(createProfile(scannerGeorg.nextLine(), questions, mainFile));
         }
-        // System.out.println(profiles.size());
-        // System.out.println(profiles.toString()); //test tostring
+        //System.out.println(profiles.size());
+        //System.out.println(profiles.toString()); //test tostring
 
         //run the algorithm
         for (int profileNumber = 0; profileNumber < profiles.size(); profileNumber++) {
             algorithm(profiles, profileNumber);
         }
     }
-    
-    public static Profile createProfile(String line, ArrayList<String> questions) throws NumberFormatException {
+
+    public static Profile createProfile(String line, ArrayList<String> questions, PrintStream mainFile) throws NumberFormatException, FileNotFoundException {
 
         String[] sally = line.split("\\s*,\\s*"); //regex again
         String name = sally[0];
@@ -52,7 +62,7 @@ public class DataProcessor { //can we get this to run when the excel file update
         for (int i = 0; i < questions.size(); i++) { //creating the questions for the arraylist
             pfQuestions.add(new Question(questions.get(i), Integer.parseInt(sally[7 + (i * 3)]), Integer.parseInt(sally[8 + (i * 3)]), Integer.parseInt(sally[9 + (i * 3)])));
         }
-        Profile profilebob = new Profile(name, email, pronouns, grade, bio, pickUpLine, pfQuestions);
+        Profile profilebob = new Profile(name, email, pronouns, grade, bio, pickUpLine, pfQuestions, mainFile);
         return profilebob;
     }
 
