@@ -14,6 +14,9 @@ public class MatchPage extends HttpServlet {
     public void init() {
         profiles = new ArrayList<>();
 
+        // main file: "/Users/babu/IdeaProjects/demo/src/main/resources/MainFileForIDS.csv"
+        // other files: "/Users/babu/IdeaProjects/demo/src/main/resources/" + this.email + ".csv"
+
         //temporary test code
         //this will be done by a file reader, has to be automated
         ArrayList<Question> exampleqs = new ArrayList<Question>();

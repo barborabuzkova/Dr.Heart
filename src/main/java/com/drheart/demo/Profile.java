@@ -73,7 +73,7 @@ public class Profile{
         //Add email/identifier to central file
         mainFile.print(this.email + ",");
 
-        File newProfileFile = new File("/Users/babu/IdeaProjects/demo/src/main/FileStorage/" + this.email + ".csv");
+        File newProfileFile = new File("/Users/babu/IdeaProjects/demo/src/main/resources/" + this.email + ".csv");
         newProfile = new PrintStream(newProfileFile);
         populateNewFile();
     }
@@ -100,7 +100,7 @@ public class Profile{
      */
     public void addMatch (Match match) {
         matches.add(match);
-        newProfile.print(match.getOtherProfile().getEmail() + "," + match.getMatchPercentage() + ",");
+        newProfile.print(match.getOtherProfile().getEmail() + "," + match.getMatchPercentageFormated() + ",");
     }
 
     /**

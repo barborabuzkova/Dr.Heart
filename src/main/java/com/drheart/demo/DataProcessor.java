@@ -14,15 +14,15 @@ public class DataProcessor { //Can we get this to run when the excel file update
 
     public static void main(String[] args) throws FileNotFoundException {
         //Create scanner, split
-        Scanner scannerGeorg = new Scanner(new File("/Users/babu/IdeaProjects/demo/src/main/resources/SampleFormData.csv"));
+        Scanner dataFromForm = new Scanner(new File("/Users/babu/IdeaProjects/demo/src/main/resources/SampleFormData.csv"));
 
         //Read first line and read in questions
-        String bob = scannerGeorg.nextLine();
+        String firstLine = dataFromForm.nextLine();
         ArrayList<String> questions = new ArrayList<>();
-        String[] lineOne = bob.split("\\s*,\\s*");
+        String[] lineOne = firstLine.split("\\s*,\\s*");
 
         //Create Main File with all profiles
-        File MainFileForIDS = new File("/Users/babu/IdeaProjects/demo/src/main/FileStorage/MainFileForIDS.csv");
+        File MainFileForIDS = new File("/Users/babu/IdeaProjects/demo/src/main/resources/MainFileForIDS.csv");
         PrintStream mainFile = new PrintStream(MainFileForIDS);
 
         //System.out.println(lineOne[0] + " " + lineOne[1]); //test line
@@ -37,8 +37,8 @@ public class DataProcessor { //Can we get this to run when the excel file update
 
         //create profiles
         ArrayList<Profile> profiles = new ArrayList<>();
-        while (scannerGeorg.hasNextLine()) {
-            profiles.add(createProfile(scannerGeorg.nextLine(), questions, mainFile));
+        while (dataFromForm.hasNextLine()) {
+            profiles.add(createProfile(dataFromForm.nextLine(), questions, mainFile));
         }
         //System.out.println(profiles.size());
         //System.out.println(profiles.toString()); //test tostring
@@ -67,24 +67,24 @@ public class DataProcessor { //Can we get this to run when the excel file update
     }
 
     public static void algorithm(ArrayList<Profile> profiles, int profileNumber) {
-        for (int j = 0; j < profiles.size(); j++) {
+        for (int j = profileNumber + 1; j < profiles.size(); j++) {
             ArrayList<Question> q1 = profiles.get(profileNumber).getQuestions();
             ArrayList<Question> q2 = profiles.get(j).getQuestions();
-            int selfSum1 = 0;
-            int selfSum2 = 0;
-            int desSum1 = 0;
-            int desSum2 = 0;
-            int impSum1 = 0;
-            int impSum2 = 0;
-            int score1 = 0;
-            int score2 = 0;
+            double selfSum1 = 0;
+            double selfSum2 = 0;
+            double desSum1 = 0;
+            double desSum2 = 0;
+            double impSum1 = 0;
+            double impSum2 = 0;
+            double score1 = 0;
+            double score2 = 0;
             for (int k = 0; k < profiles.get(profileNumber).getQuestions().size(); k++) { //cumulative sum
-                int self1 = q1.get(k).getScoreSelf();
-                int self2 = q2.get(k).getScoreSelf();
-                int des1 = q1.get(k).getScoreDesired();
-                int des2 = q2.get(k).getScoreDesired();
-                int imp1 = importanceVal(q1.get(k).getScoreDesiredImportance());
-                int imp2 = importanceVal(q2.get(k).getScoreDesiredImportance());
+                double self1 = q1.get(k).getScoreSelf();
+                double self2 = q2.get(k).getScoreSelf();
+                double des1 = q1.get(k).getScoreDesired();
+                double des2 = q2.get(k).getScoreDesired();
+                double imp1 = importanceVal(q1.get(k).getScoreDesiredImportance());
+                double imp2 = importanceVal(q2.get(k).getScoreDesiredImportance());
                 selfSum1 += self1;
                 selfSum2 += self2;
                 desSum1 += des1;
@@ -101,7 +101,7 @@ public class DataProcessor { //Can we get this to run when the excel file update
         }
     }
 
-    public static int matchScore(int desired, int other, int importance) {
+    public static double matchScore(double desired, double other, double importance) {
         if (desired == other) {
             return importance;
         } else if (Math.abs(desired - other) == 1) {

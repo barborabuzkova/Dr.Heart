@@ -1,5 +1,7 @@
 package com.drheart.demo;
 
+import java.text.DecimalFormat;
+
 public class Match implements Comparable {
     private final Profile otherProfile;
 
@@ -19,6 +21,10 @@ public class Match implements Comparable {
      */
     public Double getMatchPercentage() {
         return matchPercentage;
+    }
+
+    public String getMatchPercentageFormated() {
+        return new DecimalFormat("#.##").format(matchPercentage);
     }
 
     /**
