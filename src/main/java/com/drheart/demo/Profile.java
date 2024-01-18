@@ -24,24 +24,23 @@ public class Profile{
     private PrintStream newProfile;
 
     /**
-     * This is being kept so that MatchPage works, the final project should not use this
+     * Used by servlets to create profiles
      * @param name String name of person
      * @param email String email, used as identifier
      * @param pronouns String pronouns
      * @param grade Int grade
      * @param bio String bio
      * @param pickUpLine String pickup line
-     * @param questions String Arraylist with the name of all questions
      */
     public Profile(String name, String email, String pronouns, int grade, String bio,
-                   String pickUpLine, ArrayList<Question> questions) {
+                   String pickUpLine) {
         this.name = name;
         this.email = email;
         this.pronouns = pronouns;
         this.grade = grade;
         this.bio = bio;
         this.pickUpLine = pickUpLine;
-        this.questions = questions;
+        this.questions = new ArrayList<Question>();
         this.matches = new TreeSet<Match>();
     }
 
@@ -101,6 +100,13 @@ public class Profile{
     public void addMatch (Match match) {
         matches.add(match);
         newProfile.print(match.getOtherProfile().getEmail() + "," + match.getMatchPercentageFormated() + ",");
+    }
+
+    /**
+     * Used by servlets, adds match without adding to the file
+     */
+    public void addMatchWithoutPrint (Match match) {
+        matches.add(match);
     }
 
     /**

@@ -21,10 +21,6 @@ public class DataProcessor { //Can we get this to run when the excel file update
         ArrayList<String> questions = new ArrayList<>();
         String[] lineOne = firstLine.split("\\s*,\\s*");
 
-        //Create Main File with all profiles
-        File MainFileForIDS = new File("/Users/babu/IdeaProjects/demo/src/main/resources/MainFileForIDS.csv");
-        PrintStream mainFile = new PrintStream(MainFileForIDS);
-
         //System.out.println(lineOne[0] + " " + lineOne[1]); //test line
         int x = 7; // how many questions are just for profile information + age which we don't use
         //System.out.println(lineOne.length); //test line
@@ -34,6 +30,17 @@ public class DataProcessor { //Can we get this to run when the excel file update
             x += 3; // by 1, and then skip 2 for 'desired outcome' and 'importance'
         }
         //System.out.println(questions.toString()); //test line
+
+        //Create file with all question to avoid having to scan for it might be unnecessary?
+        File QuestionsFile = new File("/Users/babu/IdeaProjects/demo/src/main/resources/QuestionsFile.csv");
+        PrintStream QueststionsFilePrintStream = new PrintStream(QuestionsFile);
+        for (int i = 0; i < questions.size(); i++) {
+            QueststionsFilePrintStream.print(questions.get(i) + ",");
+        }
+
+        //Create Main File with all profiles
+        File MainFileForIDS = new File("/Users/babu/IdeaProjects/demo/src/main/resources/MainFileForIDS.csv");
+        PrintStream mainFile = new PrintStream(MainFileForIDS);
 
         //create profiles
         ArrayList<Profile> profiles = new ArrayList<>();
@@ -49,18 +56,19 @@ public class DataProcessor { //Can we get this to run when the excel file update
         }
     }
 
-    public static Profile createProfile(String line, ArrayList<String> questions, PrintStream mainFile) throws NumberFormatException, FileNotFoundException {
-
-        String[] sally = line.split("\\s*,\\s*"); //regex again
-        String name = sally[0];
-        String email = sally[1];
-        String pronouns = sally[2];
-        int grade = Integer.parseInt(sally[3]); //parse string into int
-        String bio = sally[4];
-        String pickUpLine = sally[5];
+    public static Profile createProfile(String line, ArrayList<String> questions, PrintStream mainFile)
+            throws NumberFormatException, FileNotFoundException {
+        String[] currentLine = line.split("\\s*,\\s*"); //regex again
+        String name = currentLine[0];
+        String email = currentLine[1];
+        String pronouns = currentLine[2];
+        int grade = Integer.parseInt(currentLine[3]); //parse string into int
+        String bio = currentLine[4];
+        String pickUpLine = currentLine[5];
         ArrayList<Question> pfQuestions = new ArrayList<Question>();
         for (int i = 0; i < questions.size(); i++) { //creating the questions for the arraylist
-            pfQuestions.add(new Question(questions.get(i), Integer.parseInt(sally[7 + (i * 3)]), Integer.parseInt(sally[8 + (i * 3)]), Integer.parseInt(sally[9 + (i * 3)])));
+            pfQuestions.add(new Question(questions.get(i), Integer.parseInt(currentLine[7 + (i * 3)]),
+                    Integer.parseInt(currentLine[8 + (i * 3)]), Integer.parseInt(currentLine[9 + (i * 3)])));
         }
         Profile profilebob = new Profile(name, email, pronouns, grade, bio, pickUpLine, pfQuestions, mainFile);
         return profilebob;
@@ -121,12 +129,14 @@ public class DataProcessor { //Can we get this to run when the excel file update
             return 10;
         } else if (v == 4) {
             return 20;
-        } else { //in the incredibly unlikely chance of a number other than 1-5 being here, i want it to be categorized as unimportant (lumped with values of 1)
+        } else { //in the incredibly unlikely chance of a number other than 1-5 being here,
+                 // I want it to be categorized as unimportant (lumped with values of 1)
             return 0;
         }
     }
 
-    // public static Profile createProfile(Scanner s) { //make sure we create form responses so that we have the right format from the excel file/whatever type of file we use
+    // public static Profile createProfile(Scanner s) { //make sure we create form responses
+    // so that we have the right format from the excel file/whatever type of file we use
 //       String name = s.next();
 //       int age = s.nextInt();
 //       Profile newProfile = new Profile(name, age);

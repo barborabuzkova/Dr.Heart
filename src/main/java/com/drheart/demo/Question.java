@@ -15,18 +15,6 @@ public class Question {
     private int scoreDesiredImportance;
 
     /**
-     * initializes question object using only questionName, only used for testing
-     * @param questionName Name of question, ex: "assertiveness"
-     */
-    public Question(String questionName) {
-        this.questionName = questionName;
-        scoreSelf = -1;
-        scoreDesired = -1;
-        scoreDesiredImportance = -1;
-
-    }
-
-    /**
      * initializes question object with all data about profile's response to the questions
      * @param name Name of question, ex: "assertiveness"
      * @param self score of person
@@ -82,4 +70,17 @@ public class Question {
     public String toString() {
         return questionName + "," + scoreSelf + "," + scoreDesired + "," + scoreDesiredImportance + ",";
     }
+
+    //this was originally used for testing, shouldn't be necessary anymore
+//    /**
+//     * initializes question object using only questionName, only used for testing
+//     * @param questionName Name of question, ex: "assertiveness"
+//     */
+//    public Question(String questionName) {
+//        this.questionName = questionName;
+//        scoreSelf = -1;
+//        scoreDesired = -1;
+//        scoreDesiredImportance = -1;
+//
+//    }
 }
