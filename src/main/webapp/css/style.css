@@ -1,0 +1,50 @@
+.heading {
+    color: darkmagenta;
+    font-size: xxx-large;
+    text-align: center;
+    align-items: center;
+    margin-left: 200px;
+    margin-right: 200px;
+    padding: 20px;
+    background: ghostwhite;
+    font-style: italic;
+}
+.sub-heading {
+    color: darkmagenta;
+    font-size: xx-large;
+    text-align: center;
+    align-items: center;
+    margin-left: 400px;
+    margin-right: 400px;
+    padding: 5px;
+    background: ghostwhite;
+}
+.link {
+    color: indigo;
+}
+.general-body {
+    color: black;
+    background-color: lavender;
+    text-align: center;
+    margin: 5px;
+    font-size: xx-large;
+}
+.general-table table, tr, th, td, div{
+    background-color: aliceblue;
+    align-items: center;
+    width: fit-content;
+    margin: auto;
+    border: 1px solid black;
+}
+.submit {
+    color: white;
+    background-color: mediumslateblue;
+    font-size: xx-large;
+    margin: 20px;
+}
+.input-box {
+    color: black;
+    font-size: xx-large;
+    background-color: white;
+}
+

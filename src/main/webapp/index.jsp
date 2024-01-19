@@ -3,12 +3,12 @@
 <html>
 <head>
     <title>Dr.Heart</title> <%-- website title --%>
+    <link href="css/style.css" rel="stylesheet">
 </head>
-<body style="background-color: lavender">
-<div style="text-align: center; font-size: xx-large">
-<h1 style="font-size: xxx-large">Welcome to Dr. Heart!</h1>
+<body class="general-body">
+<h1 class="heading">Welcome to Dr. Heart!</h1>
 <br>
-<a href="https://forms.office.com/r/s8WjjFmgzg" target="_blank">Don't have an account yet? Take the test!</a>
+<a class="link" href="https://forms.office.com/r/s8WjjFmgzg" target="_blank">Don't have an account yet? Take the test!</a>
 <br>
 <% String message = (String) request.getServletContext().getAttribute("message");%>
 <%= message == null ? "" : message %>
@@ -16,12 +16,10 @@
 Already have an account? Log in here:
 <br>
 <form action="MatchPage" method="GET">
-    <label style="font-size: xx-large" for="emailProvided">School Email:</label>
-    <input style="font-size: xx-large" type="email" id="emailProvided" name="emailProvided">
+    <label class="general-body" for="emailProvided">School Email:</label>
+    <input class="input-box" type="email" id="emailProvided" name="emailProvided">
     <br>
-    <br>
-    <input style="font-size: xx-large" type="submit" value="Submit">
+    <input class="submit" type="submit" value="Log in">
 </form>
-</div>
 </body>
 </html>

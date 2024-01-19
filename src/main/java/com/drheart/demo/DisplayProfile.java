@@ -108,15 +108,16 @@ public class DisplayProfile extends HttpServlet {
         for (Profile p : profiles.values()) {
             if (emailProvided.equals(p.getEmail())) {
                 Profile toDisplay = p;
-                out.println("<html> <body style=\"background-color: lavender\"> <font size=5>" +
-                        "<div style=\"text-align: center;\">");
+                out.println("<html> <head> <title>Dr.Heart-DisplayProfile</title>" +
+                        "<link href=\"css/style.css\" rel=\"stylesheet\"> </head>" +
+                        "<body class=\"general-body\">");
                 out.print("Name: " + toDisplay.getName());
                 out.print("<br> Email: " + toDisplay.getEmail());
                 out.print("<br> Grade: " + toDisplay.getGrade());
                 out.print("<br> Pronouns: " + toDisplay.getPronouns());
                 out.print("<br> Bio: " + toDisplay.getBio());
                 out.print("<br> Pickup Line: " + toDisplay.getPickUpLine());
-                out.print("</div> </font> </body> </html>");
+                out.print("</body> </html>");
             }
         }
     }

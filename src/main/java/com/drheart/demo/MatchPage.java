@@ -105,24 +105,26 @@ public class MatchPage extends HttpServlet {
         for (Profile p : profiles.values()) {
             if (emailProvided.equals(p.getEmail())) {
                 //table
-                out.println("<html> <body style=\"background-color: lavender\">" +
-                        "<div style=\"text-align: center; font-size: x-large\">" +
-                        "<font size=7> Welcome, " + p.getName() + "! </font> <br> <br>" +
-                        "<table align=\"center\" border=1px> <tr> <th> <font size=6> Name </font> </th>" +
+                out.println("<html> <head> <title>Dr.Heart-MatchPage</title> " +
+                        "<link href=\"css/style.css\" rel=\"stylesheet\"> </head>" +
+                        "<body class=\"general-body\">" +
+                        "<h1 class=\"heading\"> Welcome, " + p.getName() + "! </h1>" +
+                        "<h2 class=\"sub-heading\"> Here are your match results! </h2>" +
+                        "<div> <table class=\"general-table\"> <tr> <th> <font size=6> Name </font> </th>" +
                         "<th> <font size=6> Compatibility % </font> </th> </tr>");
 
                 out.println(tableRow(p));
                 emailFound = true;
             }
         }
-        out.println("</table> <br>");
+        out.println("</table> </div>");
         //if the email isn't there it should send you back to index.jsp with a message
         if (!emailFound) {
             getServletContext().setAttribute("message", "email not found: " + emailProvided);
             response.sendRedirect(request.getContextPath());
         }
-        out.println("<a href = "+request.getContextPath()+"> Back </a> <br> <br>");
-        out.println("<a href=\"http://localhost:9999/demo-1.0-SNAPSHOT.war/DisplayProfile?emailProvided=" +
+        out.println("<a class=\"link\" href = "+request.getContextPath()+"> Back </a> <br>");
+        out.println("<a class=\"link\" href=\"http://localhost:9999/demo-1.0-SNAPSHOT.war/DisplayProfile?emailProvided=" +
                 emailProvided + "\" > View My Profile </a>");
         out.println("</div> </body> </html>");
     }
@@ -131,9 +133,9 @@ public class MatchPage extends HttpServlet {
         StringBuilder result = new StringBuilder();
         for (Match i : profile.getMatches()) {
             result.append("<tr> <td> <font size=5> " +
-                    "<a href=\"http://localhost:9999/demo-1.0-SNAPSHOT.war/DisplayProfile?emailProvided=" +
+                    "<a class=\"link\" href=\"http://localhost:9999/demo-1.0-SNAPSHOT.war/DisplayProfile?emailProvided=" +
                     i.getOtherProfile().getEmail() + "\" >" + i.getOtherProfile().getName() + "</a>" +
-                    "</font> </td>" + "<td> <font size=5>" + i.getMatchPercentage() + "</font> %</td> </tr>");
+                    "</font> </td>" + "<td> <font size=5>" + i.getMatchPercentage() + "%</font></td> </tr>");
         }
         return result.toString();
     }
