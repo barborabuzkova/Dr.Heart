@@ -10,7 +10,6 @@ import jakarta.servlet.annotation.WebServlet;
 
 @WebServlet(name = "MatchPage", value = "/MatchPage")
 public class MatchPage extends HttpServlet {
-   // private String message;
     private Map<String, Profile> profiles;
 
     private int numberOfQuestions;
@@ -90,21 +89,6 @@ public class MatchPage extends HttpServlet {
                 currentLocInProfile += 2;
             }
         }
-
-//        //temporary test code
-//        profiles.add(new Profile("Person0", "email1@seattleschools.org", "p1", 11, "bio1",
-//                "pul1"));
-//        profiles.add(new Profile("Person1", "email2@seattleschools.org", "p2", 11, "bio2",
-//                "pul2"));
-//        profiles.add(new Profile("Person3", "email3@seattleschools.org", "p3", 11, "bio3",
-//                "pul3"));
-//        //this part will be done by the algorithm
-//        profiles.get(0).addMatch(new Match(profiles.get(1), .01));
-//        profiles.get(1).addMatch(new Match(profiles.get(0), .01));
-//        profiles.get(0).addMatch(new Match(profiles.get(2), .02));
-//        profiles.get(2).addMatch(new Match(profiles.get(0), .02));
-//        profiles.get(1).addMatch(new Match(profiles.get(2), .12));
-//        profiles.get(2).addMatch(new Match(profiles.get(1), .12));
     }
 
     @Override
@@ -118,28 +102,34 @@ public class MatchPage extends HttpServlet {
         boolean emailFound = false;
 
         //table
-        out.println("<html> <table border=1px> <tr> <th>Name</th> <th>Compatibility %</th> </tr>");
+        out.println("<html> <body style=\"background-color: lavender\"> <font size=5>" +
+                "<table border=1px> <tr> <th> <font size=6> Name </font> </th>" +
+                "<th> <font size=6> Compatibility % </font> </th> </tr>");
         for (Profile p : profiles.values()) {
             if (emailProvided.equals(p.getEmail())) {
                 out.println(tableRow(p));
                 emailFound = true;
             }
         }
-        out.println("</table> <br/>");
+        out.println("</table> <br>");
         //if the email isn't there it should send you back to index.jsp with a message
         if (!emailFound) {
             getServletContext().setAttribute("message", "email not found: " + emailProvided);
             response.sendRedirect(request.getContextPath());
         }
-        out.println("<a href = "+request.getContextPath()+"> back </a>");
-        out.println("</html>");
+        out.println("<a href = "+request.getContextPath()+"> Back </a> <br> <br>");
+        out.println("<a href=\"http://localhost:9999/demo-1.0-SNAPSHOT.war/DisplayProfile?emailProvided=" +
+                emailProvided + "\" > View My Profile </a>");
+        out.println("</font> </body> </html>");
     }
 
     private String tableRow (Profile profile) {
         StringBuilder result = new StringBuilder();
         for (Match i : profile.getMatches()) {
-            result.append("<tr> <td>" + i.getOtherProfile().getName() + "</td>" +
-                    "<td>" + i.getMatchPercentage() + "</td> </tr>");
+            result.append("<tr> <td> <font size=5> " +
+                    "<a href=\"http://localhost:9999/demo-1.0-SNAPSHOT.war/DisplayProfile?emailProvided=" +
+                    i.getOtherProfile().getEmail() + "\" >" + i.getOtherProfile().getName() + "</a>" +
+                    "</font> </td>" + "<td> <font size=5>" + i.getMatchPercentage() + "</font> %</td> </tr>");
         }
         return result.toString();
     }

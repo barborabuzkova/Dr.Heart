@@ -23,8 +23,8 @@ public class Match implements Comparable {
         return matchPercentage;
     }
 
-    public String getMatchPercentageFormated() {
-        return new DecimalFormat("#.##").format(matchPercentage);
+    public int getMatchPercentageFormated() {
+        return (int) Math.round(matchPercentage * 100);
     }
 
     /**
@@ -40,6 +40,10 @@ public class Match implements Comparable {
      */
     @Override
     public int compareTo(Object o) {
-        return - matchPercentage.compareTo(((Match) o).getMatchPercentage());
+        if (!matchPercentage.equals(((Match) o).getMatchPercentage())) {
+            return -matchPercentage.compareTo(((Match) o).getMatchPercentage());
+        } else {
+            return otherProfile.getName().compareTo(((Match) o).getOtherProfile().getName());
+        }
     }
 }

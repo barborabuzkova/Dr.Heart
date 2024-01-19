@@ -138,6 +138,27 @@ public class Profile{
     }
 
     /**
+     * @return String pronouns of profile/person
+     */
+    public String getPronouns() {
+        return pronouns;
+    }
+
+    /**
+     * @return String bio of profile/person
+     */
+    public String getBio() {
+        return bio;
+    }
+
+    /**
+     * @return String pickup line of profile/person
+     */
+    public String getPickUpLine() {
+        return pickUpLine;
+    }
+
+    /**
      * @return ArrayList of the Questions which should be filled out
      */
     public ArrayList<Question> getQuestions() {

@@ -52,10 +52,21 @@ public class DataProcessor { //Can we get this to run when the excel file update
 
         //run the algorithm
         for (int profileNumber = 0; profileNumber < profiles.size(); profileNumber++) {
-            algorithm(profiles, profileNumber);
+            algorithm(profiles, profileNumber, profileNumber + 1);
         }
+
+        // algorithm(profiles, profiles.size() - 1, 0)  // used for running the profile if there's already a lot of profiles made
     }
 
+    /**
+     *
+     * @param line Line of initial form being read in
+     * @param questions Names of questions
+     * @param mainFile File that will hold all the emails
+     * @return
+     * @throws NumberFormatException
+     * @throws FileNotFoundException
+     */
     public static Profile createProfile(String line, ArrayList<String> questions, PrintStream mainFile)
             throws NumberFormatException, FileNotFoundException {
         String[] currentLine = line.split("\\s*,\\s*"); //regex again
@@ -74,8 +85,8 @@ public class DataProcessor { //Can we get this to run when the excel file update
         return profilebob;
     }
 
-    public static void algorithm(ArrayList<Profile> profiles, int profileNumber) {
-        for (int j = profileNumber + 1; j < profiles.size(); j++) {
+    public static void algorithm(ArrayList<Profile> profiles, int profileNumber, int startingNumber) {
+        for (int j = startingNumber; j < profiles.size(); j++) {
             ArrayList<Question> q1 = profiles.get(profileNumber).getQuestions();
             ArrayList<Question> q2 = profiles.get(j).getQuestions();
             double selfSum1 = 0;
@@ -99,7 +110,7 @@ public class DataProcessor { //Can we get this to run when the excel file update
                 desSum2 += des2;
                 impSum1 += imp1;
                 impSum2 += imp2;
-                score1 += matchScore(des1, self2, imp1);
+                score1 += matchScore(des1, self2, imp1); // should these be sums?
                 score2 += matchScore(des2, self1, imp2);
             }
             double matchPercentage1 = score1 / impSum1; //match percentage of j profile with i
