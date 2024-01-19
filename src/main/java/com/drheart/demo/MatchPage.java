@@ -101,12 +101,16 @@ public class MatchPage extends HttpServlet {
 
         boolean emailFound = false;
 
-        //table
-        out.println("<html> <body style=\"background-color: lavender\"> <font size=5>" +
-                "<table border=1px> <tr> <th> <font size=6> Name </font> </th>" +
-                "<th> <font size=6> Compatibility % </font> </th> </tr>");
+
         for (Profile p : profiles.values()) {
             if (emailProvided.equals(p.getEmail())) {
+                //table
+                out.println("<html> <body style=\"background-color: lavender\">" +
+                        "<div style=\"text-align: center; font-size: x-large\">" +
+                        "<font size=7> Welcome, " + p.getName() + "! </font> <br> <br>" +
+                        "<table align=\"center\" border=1px> <tr> <th> <font size=6> Name </font> </th>" +
+                        "<th> <font size=6> Compatibility % </font> </th> </tr>");
+
                 out.println(tableRow(p));
                 emailFound = true;
             }
@@ -120,7 +124,7 @@ public class MatchPage extends HttpServlet {
         out.println("<a href = "+request.getContextPath()+"> Back </a> <br> <br>");
         out.println("<a href=\"http://localhost:9999/demo-1.0-SNAPSHOT.war/DisplayProfile?emailProvided=" +
                 emailProvided + "\" > View My Profile </a>");
-        out.println("</font> </body> </html>");
+        out.println("</div> </body> </html>");
     }
 
     private String tableRow (Profile profile) {
