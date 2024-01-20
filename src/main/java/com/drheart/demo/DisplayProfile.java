@@ -102,6 +102,8 @@ public class DisplayProfile extends HttpServlet {
         String emailProvided = request.getParameter("emailProvided");
         System.out.println("Email :: " + emailProvided);
 
+        String originalEmail = request.getParameter("originalEmail");
+
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
@@ -111,12 +113,17 @@ public class DisplayProfile extends HttpServlet {
                 out.println("<html> <head> <title>Dr.Heart-DisplayProfile</title>" +
                         "<link href=\"css/style.css\" rel=\"stylesheet\"> </head>" +
                         "<body class=\"general-body\">");
+                out.print("<h1 class=\"heading\"> Profile Information </h1>");
                 out.print("Name: " + toDisplay.getName());
-                out.print("<br> Email: " + toDisplay.getEmail());
-                out.print("<br> Grade: " + toDisplay.getGrade());
-                out.print("<br> Pronouns: " + toDisplay.getPronouns());
-                out.print("<br> Bio: " + toDisplay.getBio());
-                out.print("<br> Pickup Line: " + toDisplay.getPickUpLine());
+                out.print("<br> <br> Email: " + toDisplay.getEmail());
+                out.print("<br> <br> Grade: " + toDisplay.getGrade());
+                out.print("<br> <br> Pronouns: " + toDisplay.getPronouns());
+                out.print("<br> <br> Bio: " + toDisplay.getBio());
+                out.print("<br> <br> Pickup Line: " + toDisplay.getPickUpLine());
+                out.println("<br> <br> <a class=\"link\" " +
+                        "href=\"http://localhost:9999/demo-1.0-SNAPSHOT.war/MatchPage?emailProvided=" +
+                        originalEmail + "\" > Back </a>");
+
                 out.print("</body> </html>");
             }
         }

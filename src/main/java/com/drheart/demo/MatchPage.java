@@ -14,8 +14,15 @@ public class MatchPage extends HttpServlet {
 
     private int numberOfQuestions;
 
+    private String emailProvided;
+
     @Override
     public void init() {
+//        try {
+//            DataProcessor.main(new String[]{});
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
         profiles = new HashMap<>();
 
         // main file: "/Users/babu/IdeaProjects/demo/src/main/resources/MainFileForIDS.csv"
@@ -93,7 +100,7 @@ public class MatchPage extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String emailProvided = request.getParameter("emailProvided");
+        emailProvided = request.getParameter("emailProvided");
         System.out.println("Email :: " + emailProvided);
 
         response.setContentType("text/html");
@@ -125,7 +132,7 @@ public class MatchPage extends HttpServlet {
         }
         out.println("<a class=\"link\" href = "+request.getContextPath()+"> Back </a> <br>");
         out.println("<a class=\"link\" href=\"http://localhost:9999/demo-1.0-SNAPSHOT.war/DisplayProfile?emailProvided=" +
-                emailProvided + "\" > View My Profile </a>");
+                emailProvided + "&originalEmail=" + emailProvided + "\" > View My Profile </a>");
         out.println("</div> </body> </html>");
     }
 
@@ -134,7 +141,7 @@ public class MatchPage extends HttpServlet {
         for (Match i : profile.getMatches()) {
             result.append("<tr> <td> <font size=5> " +
                     "<a class=\"link\" href=\"http://localhost:9999/demo-1.0-SNAPSHOT.war/DisplayProfile?emailProvided=" +
-                    i.getOtherProfile().getEmail() + "\" >" + i.getOtherProfile().getName() + "</a>" +
+                    i.getOtherProfile().getEmail() + "&originalEmail=" + emailProvided + "\" >" + i.getOtherProfile().getName() + "</a>" +
                     "</font> </td>" + "<td> <font size=5>" + i.getMatchPercentage() + "%</font></td> </tr>");
         }
         return result.toString();

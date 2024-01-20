@@ -30,7 +30,7 @@
     font-size: xx-large;
 }
 .general-table table, tr, th, td, div{
-    background-color: aliceblue;
+    background-color: snow;
     align-items: center;
     width: fit-content;
     margin: auto;
@@ -47,4 +47,3 @@
     font-size: xx-large;
     background-color: white;
 }
-
