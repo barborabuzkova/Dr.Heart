@@ -29,6 +29,17 @@
     margin: 5px;
     font-size: xx-large;
 }
+.body-for-profile {
+    color: black;
+    background-color: lavender;
+    text-align: center;
+    align-items: center;
+    width: 1000px;
+    margin: auto;
+    border-width: medium;
+    border-color: darkmagenta;
+    font-size: xx-large;
+}
 .general-table table, tr, th, td, div{
     background-color: snow;
     align-items: center;

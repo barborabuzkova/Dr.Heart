@@ -14,7 +14,7 @@ public class DataProcessor { //Can we get this to run when the excel file update
 
     public static void main(String[] args) throws FileNotFoundException {
         //Create scanner, split
-        Scanner dataFromForm = new Scanner(new File("/Users/babu/IdeaProjects/demo/src/main/resources/SampleFormData.csv"));
+        Scanner dataFromForm = new Scanner(new File("/Users/babu/IdeaProjects/demo/src/main/resources/Dr. Heart Account Creation(1-14).csv"));
 
         //Read first line and read in questions
         String firstLine = dataFromForm.nextLine();
@@ -22,6 +22,7 @@ public class DataProcessor { //Can we get this to run when the excel file update
         String[] lineOne = firstLine.split("\\s*,\\s*");
 
         //System.out.println(lineOne[0] + " " + lineOne[1]); //test line
+
         int x = 7; // how many questions are just for profile information + age which we don't use
         //System.out.println(lineOne.length); //test line
         while (x < lineOne.length) {

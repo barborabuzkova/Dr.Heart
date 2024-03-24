@@ -112,7 +112,7 @@ public class DisplayProfile extends HttpServlet {
                 Profile toDisplay = p;
                 out.println("<html> <head> <title>Dr.Heart-DisplayProfile</title>" +
                         "<link href=\"css/style.css\" rel=\"stylesheet\"> </head>" +
-                        "<body class=\"general-body\">");
+                        "<body background-color = \"lavender\"> <div  class=\"body-for-profile\">");
                 out.print("<h1 class=\"heading\"> Profile Information </h1>");
                 out.print("Name: " + toDisplay.getName());
                 out.print("<br> <br> Email: " + toDisplay.getEmail());
@@ -122,9 +122,9 @@ public class DisplayProfile extends HttpServlet {
                 out.print("<br> <br> Pickup Line: " + toDisplay.getPickUpLine());
                 out.println("<br> <br> <a class=\"link\" " +
                         "href=\"http://localhost:9999/demo-1.0-SNAPSHOT.war/MatchPage?emailProvided=" +
-                        originalEmail + "\" > Back </a>");
+                        originalEmail + "\" > Back </a> <br> <br>");
 
-                out.print("</body> </html>");
+                out.print("</div> </body> </html>");
             }
         }
     }
